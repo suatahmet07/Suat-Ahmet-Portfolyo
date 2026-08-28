@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Suat Ahmet — Portfolyo</title>
+
+  <!-- PAYLAŞIM KARTI (Open Graph) -->
+  <meta name="description" content="Suat Ahmet — web yazılımcısı. Arayüz tasarlıyor, kodluyor ve yayına alıyorum. Projeler, deneyim ve iletişim bir arada.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Suat Ahmet">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:title" content="Suat Ahmet — Portfolyo">
+  <meta property="og:description" content="Web yazılımcısı — arayüz tasarlıyor, kodluyor, yayına alıyorum.">
+  <meta property="og:url" content="https://suatahmetportfolyo.netlify.app/">
+  <meta property="og:image" content="https://suatahmetportfolyo.netlify.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Suat Ahmet — Kişisel Portfolyo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Suat Ahmet — Portfolyo">
+  <meta name="twitter:description" content="Web yazılımcısı — arayüz tasarlıyor, kodluyor, yayına alıyorum.">
+  <meta name="twitter:image" content="https://suatahmetportfolyo.netlify.app/og-image.jpg">
+
+  <!-- SEKME İKONU -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <meta name="theme-color" id="theme-color-meta" content="#0b0b0c">
+
+  <!-- Tipografi: -->
+
+  <link rel="preload" href="fonts/bodoni-moda-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ============================================================
+       JAVASCRIPT KAPALIYKEN / YÜKLENEMEZKEN
+       ============================================================
+       Bu site tamamen JS'e bağlı: <main> "hidden" ile başlıyor ve onu
+       yalnızca script.js açıyor, proje kartları ile deneyim kayıtları da
+       JS tarafından üretiliyor. Yani script.js herhangi bir sebeple
+       çalışmazsa (kullanıcı kapatmış, eklenti engellemiş, dosya yarım
+       inmiş, tek bir yazım hatası) ziyaretçi karşılama ekranında
+       kilitleniyordu: yazı beliriyor, tema kartları geliyor, butonlar
+       hiçbir şey yapmıyor. Ölçtüğümüzde sayfada okunabilir 206 karakter
+       vardı ve hiçbiri senin işinle ilgili değildi.
+
+       ÇÖZÜM İKİ PARÇA:
+       1) Buradaki <style> — JS varsa tarayıcı bunu HİÇ okumaz. Yoksa
+          çalışmayan kabuğu ve karşılama ekranını tamamen kaldırıyor,
+          body'nin "overflow: hidden" kilidini açıyor (o kilit, kaydırma
+          görünümlerin içinde olduğu için var; görünüm yokken sayfayı
+          hareketsiz bırakıyordu).
+       2) <body>'nin hemen başındaki <noscript> bloğu — sade, düz HTML
+          bir kartvizit. Amaç siteyi taklit etmek değil; ziyaretçinin
+          kim olduğunu öğrenip sana ulaşabilmesi.
+
+       NEDEN <head> İÇİNDE BİR <noscript>: <head>'deki noscript yalnızca
+       <style>/<link>/<meta> alabilir — ki burada tam olarak o var. Stili
+       body'ye koysaydık kabuk bir an görünüp sonra kaybolurdu. -->
+  <noscript>
+    <style>
+      #intro-screen,
+      .main-content { display: none !important; }
+
+      body {
+        overflow: auto !important;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 24px;
+      }
+
+      .ns {
+        width: 100%;
+        max-width: 620px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      .ns-mark { height: 30px; width: auto; display: block; color: var(--text-secondary); margin-bottom: 34px; }
+
+      .ns-eyebrow {
+        font-family: 'Newsreader', Georgia, serif;
+        font-style: italic;
+        font-size: 0.95rem;
+        color: var(--text-tertiary);
+        margin-bottom: 14px;
+      }
+
+      .ns h1 {
+        font-size: clamp(2rem, 6vw, 3rem);
+        font-weight: 200;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: var(--text-primary);
+        margin-bottom: 22px;
+      }
+
+      .ns h1 b { font-weight: 200; color: var(--accent); }
+
+      .ns p {
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.75;
+        color: var(--text-secondary);
+        margin-bottom: 18px;
+        max-width: 56ch;
+      }
+
+      .ns-rule {
+        width: 90px; height: 1px; border: 0; margin: 30px 0;
+        background: linear-gradient(90deg, var(--accent), transparent);
+      }
+
+      .ns-mail {
+        display: inline-block;
+        font-size: clamp(1.1rem, 3vw, 1.5rem);
+        font-weight: 300;
+        color: var(--text-primary);
+        text-decoration: none;
+        border-bottom: 1px solid var(--accent);
+        padding-bottom: 4px;
+      }
+
+      .ns-note {
+        margin-top: 34px;
+        font-size: 0.85rem;
+        color: var(--text-tertiary);
+        border-left: 1px solid var(--line-strong);
+        padding-left: 14px;
+      }
+    </style>
+  </noscript>
+</head>
+<body>
+
+  <noscript>
+    <div class="ns">
+      <svg class="ns-mark" viewBox="0 0 1479 940" fill="currentColor" aria-hidden="true" focusable="false">
+        <polygon points="445,0 0,225 0,316 442,554 442,446 115,279 442,108"/>
+        <polygon points="3,359 3,469 329,636 3,811 3,922 446,690 446,605"/>
+        <polygon points="962,6 839,8 474,930 596,926"/>
+        <polygon points="995,3 1111,7 1479,938 1364,940"/>
+      </svg>
+
+      <p class="ns-eyebrow">Kişisel Portfolyo</p>
+      <h1>Merhaba, ben <b>Suat Ahmet</b>.</h1>
+
+      <p>
+        Web yazılımcısıyım — arayüz tasarlıyor, kodluyor ve yayına alıyorum.
+        Hem kullanıcı arayüzü hem de arka uç tarafında çalışıyorum: HTML, CSS,
+        JavaScript, React, Node.js.
+      </p>
+
+      <hr class="ns-rule">
+
+      <a class="ns-mail" href="mailto:suatahmetavsarofficial@gmail.com">suatahmetavsarofficial@gmail.com</a>
+
+      <p class="ns-note">
+        Sitenin tamamı (projeler, deneyim çizelgesi, tema geçişi) JavaScript
+        ile çalışıyor. Tarayıcında JavaScript kapalı görünüyor; açtığında
+        sayfanın tamamı yüklenecek.
+      </p>
+    </div>
+  </noscript>
+
+
+  <!-- Karşılama Ekranı Katmanı -->
+  <section id="intro-screen">
+
+    <div class="ambient-glow" aria-hidden="true"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <div class="monogram" aria-hidden="true">
+      <svg class="monogram-mark" viewBox="0 0 1479 940" fill="currentColor" aria-hidden="true" focusable="false">
+        <polygon points="445,0 0,225 0,316 442,554 442,446 115,279 442,108"/>
+        <polygon points="3,359 3,469 329,636 3,811 3,922 446,690 446,605"/>
+        <polygon points="962,6 839,8 474,930 596,926"/>
+        <polygon points="995,3 1111,7 1479,938 1364,940"/>
+      </svg>
+    </div>
+
+    <div class="welcome-container">
+      <p class="eyebrow">Kişisel Portfolyo</p>
+
+      <h1 class="fade-text">
+        <span class="word word-1 name-light"><span class="shine-effect">Suat</span></span>
+        <span class="word word-2 name-light"><span class="shine-effect">Ahmet</span></span>
+        <span class="word word-3 accent-serif"><span class="shine-effect">Portfolyo'ya</span></span>
+        <span class="word word-4">Hoş</span>
+        <span class="word word-5">Geldiniz</span>
+      </h1>
+
+      <div class="signature-rule" aria-hidden="true"></div>
+
+      <p class="fade-subtext">Projeler, web sayfaları ve daha fazlası bir arada.</p>
+    </div>
+
+    <!-- BURADA ESKİDEN TEMA SEÇİM ADIMI VARDI -->
+  </section>
+
+  <main id="main-content" class="main-content" hidden>
+
+    <!-- ATLAMA BAĞLANTISI -->
+    <a class="skip-link" href="#views">Ana içeriğe geç</a>
+
+    <!-- SEKME DEĞİŞİMİ DUYURUSU -->
+    <p class="sr-only" id="view-announcer" role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <div class="page-grain" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a href="#ana" class="monogram monogram-static js-view-link" data-view="ana" aria-label="Ana sayfaya dön">
+        <svg class="monogram-mark" viewBox="0 0 1479 940" fill="currentColor" aria-hidden="true" focusable="false">
+          <polygon points="445,0 0,225 0,316 442,554 442,446 115,279 442,108"/>
+          <polygon points="3,359 3,469 329,636 3,811 3,922 446,690 446,605"/>
+          <polygon points="962,6 839,8 474,930 596,926"/>
+          <polygon points="995,3 1111,7 1479,938 1364,940"/>
+        </svg>
+      </a>
+
+      <nav class="site-nav" role="tablist" aria-label="Ana menü">
+        <span class="nav-indicator" aria-hidden="true"></span>
+
+        <button type="button" class="nav-link js-view-link" data-view="ana"
+                role="tab" id="tab-ana" aria-controls="view-ana" aria-selected="true">
+          <span class="nav-link-viewport">
+            <span class="nav-link-text">Ana Sayfa</span>
+            <span class="nav-link-text nav-link-text-clone" aria-hidden="true">Ana Sayfa</span>
+          </span>
+        </button>
+
+        <button type="button" class="nav-link js-view-link" data-view="hakkimda"
+                role="tab" id="tab-hakkimda" aria-controls="view-hakkimda" aria-selected="false">
+          <span class="nav-link-viewport">
+            <span class="nav-link-text">Hakkımda</span>
+            <span class="nav-link-text nav-link-text-clone" aria-hidden="true">Hakkımda</span>
+          </span>
+        </button>
+
+        <button type="button" class="nav-link js-view-link" data-view="deneyim"
+                role="tab" id="tab-deneyim" aria-controls="view-deneyim" aria-selected="false">
+          <span class="nav-link-viewport">
+            <span class="nav-link-text">Deneyim</span>
+            <span class="nav-link-text nav-link-text-clone" aria-hidden="true">Deneyim</span>
+          </span>
+        </button>
+
+        <button type="button" class="nav-link js-view-link" data-view="projeler"
+                role="tab" id="tab-projeler" aria-controls="view-projeler" aria-selected="false">
+          <span class="nav-link-viewport">
+            <span class="nav-link-text">Projeler</span>
+            <span class="nav-link-text nav-link-text-clone" aria-hidden="true">Projeler</span>
+          </span>
+        </button>
+
+        <button type="button" class="nav-link js-view-link" data-view="iletisim"
+                role="tab" id="tab-iletisim" aria-controls="view-iletisim" aria-selected="false">
+          <span class="nav-link-viewport">
+            <span class="nav-link-text">İletişim</span>
+            <span class="nav-link-text nav-link-text-clone" aria-hidden="true">İletişim</span>
+          </span>
+        </button>
+      </nav>
+
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Temayı değiştir">
+        <span class="theme-toggle-track" aria-hidden="true">
+          <span class="theme-toggle-knob">
+            <svg class="icon-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <path d="M12 2.5v2.6M12 18.9v2.6M4.7 4.7l1.8 1.8M17.5 17.5l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.7 19.3l1.8-1.8M17.5 6.5l1.8-1.8"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.2 14.6A8.6 8.6 0 1 1 9.4 3.8a6.9 6.9 0 0 0 10.8 10.8z"></path>
+            </svg>
+          </span>
+        </span>
+      </button>
+    </header>
+
+    <div class="views" id="views">
+
+      <!-- ANA SAYFA -->
+      <section class="view is-active" id="view-ana" data-view="ana" role="tabpanel" aria-labelledby="tab-ana">
+        <div class="view-progress" aria-hidden="true">
+          <span class="view-progress-bar"></span>
+        </div>
+
+        <div class="view-scroll" tabindex="0">
+          <div class="home">
+
+            <!-- 1) POSTER HERO -->
+            <section class="home-hero" id="top">
+              <div class="home-inner">
+
+                <p class="status-badge rv" data-delay="60">
+                  <span class="status-dot" aria-hidden="true"></span>
+                  Yeni projelere açığım
+                </p>
+
+                <p class="hero-role rv" data-delay="120">Web Yazılımcısı</p>
+
+                <h1 class="hero-title" data-split data-delay="200">
+                  <span class="hero-line">Merhaba, ben</span>
+                  <span class="hero-line"><span class="accent-serif">Suat Ahmet</span>.</span>
+                </h1>
+
+                <p class="hero-text rv" data-delay="620">
+                  Arayüz tasarlıyor, kodluyor ve yayına alıyorum. Hızlı,
+                  erişilebilir ve detayına kadar düşünülmüş şekilde.
+                </p>
+
+                <div class="hero-actions rv" data-delay="720">
+                  <button type="button" class="btn btn-primary js-view-link" data-view="projeler">Projelerimi Gör</button>
+                  <button type="button" class="btn btn-ghost js-view-link" data-view="iletisim">İletişime Geç</button>
+                  <!-- <a class="btn btn-quiet" href="cv.pdf" download data-goatcounter-click="tikla-cv" data-goatcounter-title="CV indirildi">
+                    CV (Eklenecek)
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 4v12M6.5 11.5 12 17l5.5-5.5M5 20h14"></path>
+                    </svg>
+                  </a> -->
+                </div>
+              </div>
+
+              <div class="scroll-cue rv" data-delay="1000" aria-hidden="true">
+                <span class="scroll-cue-text">Kaydır</span>
+                <span class="scroll-cue-line"></span>
+              </div>
+            </section>
+
+            <!-- 2) SEÇİLMİŞ İŞLER -->
+            <section class="home-block featured">
+              <div class="home-inner">
+
+                <p class="block-eyebrow rv">Çalışmalarım</p>
+                <h2 class="block-title" data-split>Son dönemde üzerinde çalıştığım işler.</h2>
+
+                <div class="feat-wrap">
+                    <ul class="feat-list" id="feat-list"></ul>
+
+                  <div class="feat-preview" aria-hidden="true">
+                    <span class="feat-preview-inner"></span>
+                  </div>
+                </div>
+
+                <button type="button" class="text-link rv js-view-link" data-view="projeler">
+                  Tüm projeler
+                  <span class="text-link-arrow" aria-hidden="true">→</span>
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- HAKKIMDA -->
+      <section class="view" id="view-hakkimda" data-view="hakkimda" role="tabpanel" aria-labelledby="tab-hakkimda">
+        <div class="view-progress" aria-hidden="true">
+          <span class="view-progress-bar"></span>
+        </div>
+
+        <div class="view-scroll" tabindex="0">
+          <div class="about" id="hakkimda">
+
+            <!-- 1) GİRİŞ -->
+            <section class="about-intro">
+              <div class="home-inner">
+                <p class="block-eyebrow rv">Hakkımda</p>
+                <h2 class="about-title" data-split data-delay="80">
+                  Merakla kod yazıyor, detaylara özen gösteriyorum.
+                </h2>
+                <p class="about-text rv" data-delay="520">
+                  Web teknolojileriyle birkaç aydır ilgileniyor, hem kullanıcı arayüzü hem de
+                  arka uç tarafında kendimi geliştirmeye devam ediyorum. Sade, hızlı ve
+                  sürdürülebilir kod yazmayı; bir problemi en anlaşılır şekilde çözmeyi
+                  önemsiyorum. Yeni araçlar denemekten ve öğrendiklerimi küçük projelere
+                  dönüştürmekten keyif alıyorum.
+                </p>
+
+                <!-- ============ ŞU ANDA ============
+                     Üstteki paragraf "kim olduğunu" anlatıyor; bu blok
+                     "şu an ne yaptığını". İkisi bilerek yan yana: biri
+                     durağan bir tanım, diğeri sitenin yaşadığının kanıtı.
+
+                     NEDEN AYRI BİR BLOK DEĞİL DE GİRİŞİN İÇİNDE:
+                     Hakkımda'daki her ".home-block" bir ekranı dolduruyor
+                     (bkz. style.css: "BİR EKRAN = BİR BLOK"). Üç satırlık
+                     bu içerik için koca bir ekran ayırmak, ferahlık değil
+                     boşluk olurdu. Girişin devamı olarak durunca hem yer
+                     israfı olmuyor hem de anlatı bölünmüyor.
+
+                     >>> BURAYI KENDİ DURUMUNLA DEĞİŞTİR <<<
+                     Üç satır yeterli, fazlası "şu anda"yı özgeçmişe
+                     çevirir. Somut yaz: "React öğreniyorum" değil, neyi
+                     yaparak öğrendiğin.
+
+                     ÖNEMLİ — TARİHİ GÜNCEL TUT: aşağıdaki "Güncelleme"
+                     satırı bu bloğun en kritik parçası. Tarihsiz bir "şu
+                     anda" bloğu sessizce eskir; sekiz ay önceki hâliyle
+                     duran bir "şu anda", olmayandan daha kötü görünür,
+                     çünkü siteyle ilgilenmediğini söyler. Güncelleyemeyeceksen
+                     bu bloğun tamamını sil — hiçbir şey bozulmaz. -->
+                <div class="now rv" data-delay="640">
+                  <p class="now-label">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    Şu anda
+                  </p>
+
+                  <ul class="now-list">
+                    <li class="now-item">
+                      <span class="now-key">Öğreniyorum</span>
+                      <span class="now-val">
+                        Web yazılımı kursunda eğitim almaya devam etmekteyim.
+                        Her gün araştırıyor, çalışıyor ve gelişiyorum.
+                      </span>
+                    </li>
+
+                    <li class="now-item">
+                      <span class="now-key">İnşa ediyorum</span>
+                      <span class="now-val">
+                        Şu an okuduğun portfolyo sitesini; tema geçişi ve
+                        görünüm animasyonları baştan sona kendim yaptım.
+                      </span>
+                    </li>
+
+                    <li class="now-item">
+                      <span class="now-key">Sırada</span>
+                      <span class="now-val">
+                        Yeni projeler yapmak ve bunları işe dönüştürmeyi
+                        hedefliyorum.
+                      </span>
+                    </li>
+                  </ul>
+
+                  <p class="now-updated">Güncelleme: Ağustos 2026</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 2) NE YAPIYORUM -->
+            <section class="home-block caps">
+              <div class="home-inner">
+                <p class="block-eyebrow rv">Ne Yapıyorum</p>
+                <h2 class="block-title" data-split>Fikirden yayına kadar işin tamamı.</h2>
+
+                <div class="cap-grid">
+                  <article class="cap rv">
+                    <span class="cap-num" aria-hidden="true">01</span>
+                    <h3 class="cap-title">UI/UX &amp; Arayüz Tasarımı</h3>
+                    <p class="cap-text">
+                      Kodlamaya başlamadan önce ekranları kurguluyorum: tipografi,
+                      boşluk ve hiyerarşi bu adımda oturuyor. Amaç, sayfanın
+                      okunmadan da anlaşılır olması.
+                    </p>
+                    <ul class="cap-tags">
+                      <li>UI/UX</li><li>Responsive Design</li>
+                    </ul>
+                  </article>
+
+                  <article class="cap rv">
+                    <span class="cap-num" aria-hidden="true">02</span>
+                    <h3 class="cap-title">Arayüz Geliştirme</h3>
+                    <p class="cap-text">
+                      Tasarladığım arayüzleri HTML, CSS ve JavaScript ile koduyorum:
+                      her ekranda düzgün çalışan, hızlı açılan ve klavyeyle de
+                      gezilebilen sayfalar. Arka uç tarafını öğrenmeye devam ediyorum.
+                    </p>
+                    <ul class="cap-tags">
+                      <li>HTML</li><li>CSS</li><li>JavaScript</li>
+                    </ul>
+                  </article>
+
+                  <article class="cap rv">
+                    <span class="cap-num" aria-hidden="true">03</span>
+                    <h3 class="cap-title">Yayınlama &amp; Canlıya Alma</h3>
+                    <p class="cap-text">
+                      Yaptığım işi yayına almakla bitiriyorum: kodu GitHub'da
+                      paylaşıyor, siteyi Netlify üzerinden canlıya alıyor, sonrasında
+                      hız ve farklı cihaz kontrollerini yapıyorum.
+                    </p>
+                    <ul class="cap-tags">
+                      <li>Netlify</li><li>GitHub</li>
+                    </ul>
+                  </article>
+                </div>
+              </div>
+            </section>
+
+            <!-- 3) ARAÇLAR & İŞ AKIŞI -->
+            <section class="home-block flow-block">
+              <div class="home-inner">
+                <p class="block-eyebrow rv">Araçlar &amp; İş Akışı</p>
+                <h2 class="block-title" data-split>Bir işi baştan sona nasıl götürüyorum.</h2>
+
+                <ol class="flow-steps">
+                  <li class="flow-step rv">
+                    <span class="flow-step-num" aria-hidden="true">01</span>
+                    <h3 class="flow-step-title">Anla &amp; Planla</h3>
+                    <p class="flow-step-text">
+                      Önce sayfanın ne işe yarayacağını ve kimin kullanacağını
+                      netleştiriyorum. Kod yazmadan önce cevaplanmayan her soru,
+                      sonradan silinen bir ekran demek.
+                    </p>
+                  </li>
+
+                  <li class="flow-step rv" data-delay="90">
+                    <span class="flow-step-num" aria-hidden="true">02</span>
+                    <h3 class="flow-step-title">Tasarla &amp; Kurgula</h3>
+                    <p class="flow-step-text">
+                      Hangi öğenin nerede duracağını, nasıl görüneceğini ve nasıl
+                      hareket edeceğini önce zihnimde kurguluyorum. Koda ancak
+                      karar netleştiğinde geçiyorum; böylece yazdığım şeyi
+                      sonradan sökmek zorunda kalmıyorum.
+                    </p>
+                  </li>
+
+                  <li class="flow-step rv" data-delay="180">
+                    <span class="flow-step-num" aria-hidden="true">03</span>
+                    <h3 class="flow-step-title">Kodla &amp; Geliştir</h3>
+                    <p class="flow-step-text">
+                      Temiz kod prensipleriyle arayüzü HTML, CSS ve JavaScript
+                      kullanarak modüler ve hızlı bir yapıya dönüştürüyorum.
+                    </p>
+                  </li>
+
+                  <li class="flow-step rv" data-delay="270">
+                    <span class="flow-step-num" aria-hidden="true">04</span>
+                    <h3 class="flow-step-title">Test &amp; Yayınla</h3>
+                    <p class="flow-step-text">
+                      Yükleme hızı, bozuk bağlantı ve farklı cihaz
+                      kontrolünden sonra yayına alıyorum ve sonrasında da
+                      geri bildirime göre düzeltmeye devam ediyorum.
+                    </p>
+                  </li>
+                </ol>
+
+                <div class="tool-set">
+                  <div class="tool-group rv" data-delay="60">
+                    <p class="tool-group-label">Yazarken</p>
+                    <ul class="cap-tags">
+                      <li>VS Code</li><li>GitHub</li>
+                    </ul>
+                  </div>
+
+                  <div class="tool-group rv" data-delay="140">
+                    <p class="tool-group-label">Tasarlarken</p>
+                    <ul class="cap-tags">
+                      <li>Google Fonts</li>
+                    </ul>
+                  </div>
+
+                  <div class="tool-group rv" data-delay="220">
+                    <p class="tool-group-label">Denerken</p>
+                    <ul class="cap-tags">
+                      <li>Netlify</li><li>Live Server</li><li>Responsive test</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- HAKKIMDA — ALT BİLGİ (SAYILAR) -->
+          <footer class="about-stats">
+            <div class="home-inner about-stats-inner">
+              <div class="stat rv">
+                <span class="stat-num" data-count="9" data-count-source="projeler" data-pad="2">00</span>
+                <span class="stat-label">Proje</span>
+              </div>
+
+              <div class="stat rv" data-delay="110">
+                <span class="stat-num" data-count="2">0</span>
+                <span class="stat-label">Ay Deneyim</span>
+              </div>
+
+              <div class="stat rv" data-delay="220">
+                <span class="stat-num" data-count="11">0</span>
+                <span class="stat-label">Araç &amp; Teknoloji</span>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <!-- DENEYİM -->
+      <section class="view" id="view-deneyim" data-view="deneyim" role="tabpanel" aria-labelledby="tab-deneyim">
+        <div class="view-progress" aria-hidden="true">
+          <span class="view-progress-bar"></span>
+        </div>
+
+        <div class="view-scroll" tabindex="0">
+          <div class="section-inner exp-inner">
+
+            <div class="projects-head">
+              <div class="projects-head-main">
+                <p class="section-eyebrow rv" data-delay="60">Deneyim</p>
+                <h2 class="section-title" id="deneyim-baslik" data-split data-delay="140">Nereden başlayıp nereye geldim?</h2>
+                <p class="section-text rv" data-delay="420">
+                  Çalıştığım yerler, aldığım eğitimler ve tüm kariyer
+                  ilerlemem burada. En eskiden en yeniye doğru.
+                </p>
+              </div>
+
+              <div class="projects-head-side rv" data-delay="520" aria-hidden="true">
+                <span class="projects-count-num" id="exp-count"
+                      data-count="4" data-count-source="deneyim" data-pad="2">00</span>
+                <span class="projects-count-label">Durak</span>
+              </div>
+            </div>
+
+            <div class="exp-wrap">
+              <!-- Hat ve dolan kısmı. Liste <ol> olduğu için hattı onun
+                   İÇİNE koyamıyoruz (yalnızca <li> alabilir); bu yüzden
+                   kardeş olarak duruyor. -->
+              <span class="exp-track" aria-hidden="true">
+                <span class="exp-track-fill"></span>
+              </span>
+
+              <ol class="exp-list" id="exp-list"></ol>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJELER -->
+      <section class="view" id="view-projeler" data-view="projeler" role="tabpanel" aria-labelledby="tab-projeler">
+        <div class="view-progress" aria-hidden="true">
+          <span class="view-progress-bar"></span>
+        </div>
+
+        <div class="view-scroll" tabindex="0">
+          <div class="section-inner projects-inner">
+
+            <div class="projects-head">
+              <div class="projects-head-main">
+                <p class="section-eyebrow rv" data-delay="60">Projeler</p>
+                <h2 class="section-title" id="projeler-baslik" data-split data-delay="140">Tüm çalışmalarım bir arada.</h2>
+                <p class="section-text rv" data-delay="420">
+                  Aşağı kaydırdıkça projeler tek tek karşınıza çıkıyor. Yaptığım
+                  tüm projeler ve  üzerinde çalıştığım işler burada mevcuttur.
+                </p>
+              </div>
+
+              <div class="projects-head-side rv" data-delay="520" aria-hidden="true">
+                <span class="projects-count-num" id="projects-count"
+                      data-count="9" data-count-source="projeler" data-pad="2">00</span>
+                <span class="projects-count-label">Proje</span>
+              </div>
+            </div>
+
+          <div class="project-grid" id="project-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- İLETİŞİM -->
+      <section class="view" id="view-iletisim" data-view="iletisim" role="tabpanel" aria-labelledby="tab-iletisim">
+        <div class="view-scroll" tabindex="0">
+          <section class="section section-contact" id="iletisim">
+            <div class="home-inner">
+              <p class="section-eyebrow reveal">İletişim</p>
+              <h2 class="closing-title reveal">Birlikte bir şeyler inşa edelim.</h2>
+              <p class="section-text reveal">
+                Bir proje fikrin mi var, yoksa sadece merhaba mı demek istiyorsun?
+                Aşağıdaki kanallardan bana ulaşabilirsin.
+              </p>
+              <div class="closing-actions reveal">
+                <a class="closing-mail" href="mailto:suatahmetavsarofficial@gmail.com" data-goatcounter-click="tikla-eposta" data-goatcounter-title="E-posta adresine tiklandi">suatahmetavsarofficial@gmail.com</a>
+                <div class="closing-socials">
+                  <a href="https://github.com/suatahmet07" target="_blank" rel="noopener">GitHub</a>
+                  <a href="https://www.linkedin.com/in/suat-ahmet-av%C5%9Far-77b844431/" target="_blank" rel="noopener">LinkedIn</a>
+
+                  <a class="social-cta" href="https://bionluk.com/suatahmetavsar" target="_blank" rel="noopener" data-goatcounter-click="tikla-bionluk" data-goatcounter-title="Bionluk butonuna tiklandi">
+                    Bionluk'ta Çalışalım
+                    <svg class="social-cta-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M7 17 17 7M8.5 7H17v8.5"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <footer class="site-footer">
+            <p>© 2026 Suat Ahmet. Tüm hakları saklıdır.</p>
+          </footer>
+        </div>
+      </section>
+
+    </div>
+
+      <!-- PROJE DETAYI — MODAL -->
+      <div class="case-modal" id="case-modal" hidden>
+        <div class="case-modal-veil" data-case-close></div>
+
+        <div class="case-modal-panel" role="dialog" aria-modal="true" aria-label="Proje detayı">
+          <div class="case-modal-bar">
+            <span class="case-modal-count" id="case-modal-count" aria-hidden="true"></span>
+            <button type="button" class="case-close" data-case-close aria-label="Kapat">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+                <path d="M6 6l12 12M18 6L6 18"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="case-modal-progress" aria-hidden="true"><span class="case-modal-progress-bar"></span></div>
+
+          <div class="view-scroll case-modal-scroll" id="case-modal-scroll" tabindex="0">
+            <div class="case-doc-wrap" id="case-doc-wrap">
+              <!-- Detay blokları projeler.js'ten üretiliyor -->
+            </div>
+          </div>
+
+          <div class="case-modal-foot">
+            <button type="button" class="case-step" id="case-prev">
+              <span class="case-step-arrow" aria-hidden="true">←</span>
+              <span class="case-step-text">Önceki</span>
+            </button>
+            <button type="button" class="case-step case-step-next" id="case-next">
+              <span class="case-step-text">Sonraki proje</span>
+              <span class="case-step-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GÖRSEL GÖRÜNTÜLEYİCİ -->
+      <div class="gallery-modal" id="gallery-modal" hidden>
+        <div class="gallery-veil" data-gal-close></div>
+
+        <div class="gallery-panel" role="dialog" aria-modal="true" aria-label="Proje görselleri">
+          <div class="gallery-bar">
+            <span class="gallery-title" id="gallery-title"></span>
+            <button type="button" class="gallery-close" data-gal-close aria-label="Kapat">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+                <path d="M6 6l12 12M18 6L6 18"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="gallery-track" id="gallery-track"></div>
+
+          <button type="button" class="gal-arrow gal-prev" id="gal-prev" aria-label="Önceki görsel">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 5l-7 7 7 7"></path>
+            </svg>
+          </button>
+
+          <button type="button" class="gal-arrow gal-next" id="gal-next" aria-label="Sonraki görsel">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+
+          <div class="gallery-foot">
+            <div class="gallery-dots" id="gallery-dots" role="tablist" aria-label="Görseller"></div>
+            <p class="gallery-hint">Sürükleyerek gez · yakınlaştırmak için tıkla · Esc kapatır</p>
+          </div>
+        </div>
+      </div>
+
+  </main>
+
+
+  <!-- ZİYARETÇİ ÖLÇÜMÜ — GoatCounter -->
+  <script>
+    window.goatcounter = { no_onload: true };
+
+    (function () {
+      var hazir = false, kuyruk = [], sonYol = null;
+
+      function yol() {
+        return location.pathname + location.search + (location.hash || '#ana');
+      }
+
+      function say() {
+        var y = yol();
+        if (y === sonYol) return;   // aynı adresi iki kez sayma
+        sonYol = y;
+        if (hazir) window.goatcounter.count({ path: y });
+        else kuyruk.push(y);
+      }
+
+      ['pushState', 'replaceState'].forEach(function (ad) {
+        var asil = history[ad];
+        history[ad] = function () {
+          var sonuc = asil.apply(this, arguments);
+          say();
+          return sonuc;
+        };
+      });
+
+      window.addEventListener('popstate', say);
+      window.addEventListener('hashchange', say);
+
+      var kontrol = setInterval(function () {
+        if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+          clearInterval(kontrol);
+          hazir = true;
+          kuyruk.splice(0).forEach(function (y) { window.goatcounter.count({ path: y }); });
+        }
+      }, 100);
+      setTimeout(function () { clearInterval(kontrol); }, 10000);
+
+      say();  // ilk açılış
+    })();
+  </script>
+
+  <script id="gc-script"
+          data-goatcounter="https://suatahmetportfolyo.goatcounter.com/count"
+          async src="https://gc.zgo.at/count.js"></script>
+
+  <script src="projeler.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

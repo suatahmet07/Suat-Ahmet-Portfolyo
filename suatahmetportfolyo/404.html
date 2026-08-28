@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sayfa bulunamadı — Suat Ahmet</title>
+
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" id="theme-color-meta" content="#0b0b0c">
+
+  <link rel="stylesheet" href="fonts.css">
+
+  <!-- BU SAYFA NEDEN KENDİ BAŞINA DURUYOR -->
+  <style>
+    :root {
+      --bg: #0b0b0c;
+      --bg-gradient: radial-gradient(ellipse 120% 90% at 50% 38%, #19191c 0%, #0b0b0c 62%);
+      --text-primary: #f3f1ec;
+      --text-secondary: #948f85;
+      --text-tertiary: #5c5954;
+      --accent: #c9974a;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.16);
+      --btn-hover: rgba(255, 255, 255, 0.06);
+    }
+
+    /* Açık tema */
+    html[data-theme="light"] {
+      --bg: #fbfaf7;
+      --bg-gradient: radial-gradient(ellipse 120% 90% at 50% 38%, #f6f3ec 0%, #fbfaf7 62%);
+      --text-primary: #211d17;
+      --text-secondary: #6b6459;
+      --text-tertiary: #a39c8f;
+      --accent: #a97a34;
+      --line: rgba(24, 18, 8, 0.09);
+      --line-strong: rgba(24, 18, 8, 0.16);
+      --btn-hover: rgba(24, 18, 8, 0.05);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      background: var(--bg);
+      background-image: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px max(24px, env(safe-area-inset-left, 0px)) 56px max(24px, env(safe-area-inset-right, 0px));
+    }
+
+    .grain {
+      position: fixed; inset: -20%; pointer-events: none;
+      opacity: 0.035; mix-blend-mode: overlay; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .wrap { position: relative; z-index: 1; width: 100%; max-width: 620px; }
+
+    .mark {
+      height: 26px; width: auto; display: block;
+      color: var(--text-secondary);
+      margin-bottom: 44px;
+    }
+
+    .code {
+      font-family: 'Bodoni Moda', Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(4.5rem, 17vw, 8.5rem);
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      margin-bottom: 26px;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 4.6vw, 2.3rem);
+      font-weight: 200;
+      letter-spacing: -0.028em;
+      line-height: 1.14;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      max-width: 52ch;
+    }
+
+    .rule {
+      width: 90px; height: 1px; border: 0; margin: 34px 0;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 0.92rem; font-weight: 400;
+      text-decoration: none;
+      padding: 13px 24px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      color: var(--text-primary);
+      background: transparent;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .btn:hover, .btn:focus-visible { background: var(--btn-hover); border-color: var(--accent); }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #14100a;
+    }
+
+    .btn-primary:hover, .btn-primary:focus-visible { opacity: 0.88; background: var(--accent); color: #14100a; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .hint {
+      margin-top: 38px;
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--text-tertiary);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('portfolyo-theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+
+      var meta = document.getElementById('theme-color-meta');
+      if (meta) meta.setAttribute('content', t === 'light' ? '#fbfaf7' : '#0b0b0c');
+    })();
+  </script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <a href="/" aria-label="Ana sayfaya dön">
+      <svg class="mark" viewBox="0 0 1479 940" fill="currentColor" aria-hidden="true" focusable="false">
+        <polygon points="445,0 0,225 0,316 442,554 442,446 115,279 442,108"/>
+        <polygon points="3,359 3,469 329,636 3,811 3,922 446,690 446,605"/>
+        <polygon points="962,6 839,8 474,930 596,926"/>
+        <polygon points="995,3 1111,7 1479,938 1364,940"/>
+      </svg>
+    </a>
+
+    <p class="code">404</p>
+
+    <h1>Aradığın sayfa burada değil.</h1>
+
+    <p>
+      Adres yanlış yazılmış olabilir ya da bu sayfa taşınmış olabilir.
+      Sitenin tamamı tek bir adreste duruyor — aşağıdaki bağlantı seni
+      doğrudan oraya götürür.
+    </p>
+
+    <hr class="rule">
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/">Ana sayfaya dön</a>
+      <a class="btn" href="mailto:suatahmetavsarofficial@gmail.com">İletişime geç</a>
+    </div>
+
+    <p class="hint">Suat Ahmet — Kişisel Portfolyo</p>
+  </main>
+</body>
+</html>

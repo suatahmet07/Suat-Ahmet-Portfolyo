@@ -1,0 +1,44 @@
+# NETLIFY — ÖZEL BAŞLIKLAR
+
+
+# YAZI TİPLERİ
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+
+# İKONLAR VE PAYLAŞIM GÖRSELİ
+/favicon.svg
+  Cache-Control: public, max-age=2592000
+/favicon.ico
+  Cache-Control: public, max-age=2592000
+/apple-touch-icon.png
+  Cache-Control: public, max-age=2592000
+/icon-*.png
+  Cache-Control: public, max-age=2592000
+/og-image.jpg
+  Cache-Control: public, max-age=2592000
+
+
+# PROJE GÖRSELLERİ
+/images/*
+  Cache-Control: public, max-age=2592000
+
+
+# HTML / CSS / JS
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+/*.css
+  Cache-Control: public, max-age=0, must-revalidate
+/*.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+
+# GÜVENLİK — TÜM SAYFALAR
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://*.goatcounter.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; font-src 'self'; connect-src 'self' https://*.goatcounter.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  # HSTS: BİLEREK KAPALI
+  # Strict-Transport-Security: max-age=31536000; includeSubDomains
