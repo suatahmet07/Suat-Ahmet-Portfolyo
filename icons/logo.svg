@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 54 148 94" width="148" height="94" role="img" aria-label="SA">
+  <defs>
+    <!-- S'yi oluşturan iki ok şekli bu dikey şeridin içinde kırpılır (uçları düz kesilir) -->
+    <clipPath id="sa-s">
+      <rect x="31" y="0" width="43" height="200" />
+    </clipPath>
+  </defs>
+  <g fill="#000">
+    <g clip-path="url(#sa-s)">
+      <!-- Üstteki "<" -->
+      <polygon points="102.4,40 22.6,82 113.8,130 130.8,130 40.4,82.3 120.4,40" />
+      <!-- Alttaki ">" -->
+      <polygon points="-27.8,70 64.2,118.5 -33.4,170 -15.4,170 81.9,118.7 -10.6,70" />
+    </g>
+    <!-- A'nın sol ve sağ çubukları -->
+    <polygon points="114.4,55 126.4,55 89.6,147.5 76.6,147.5" />
+    <polygon points="129.6,55 140.6,55 177.4,147.5 166.4,147.5" />
+  </g>
+</svg>

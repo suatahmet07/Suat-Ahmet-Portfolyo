@@ -1,0 +1,14 @@
+{
+  "name": "Suat Ahmet Avşar — Portfolyo",
+  "short_name": "Portfolyo",
+  "lang": "tr",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#DCC196",
+  "theme_color": "#DCC196",
+  "icons": [
+    { "src": "/icons/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

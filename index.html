@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suat Ahmet Avşar — Web Geliştirici</title>
+  <meta name="description" content="Suat Ahmet Avşar'ın portfolyosu: markalar ve şirketler için geliştirdiği web siteleri, projeler, iş deneyimi ve iletişim bilgileri.">
+  <meta name="author" content="Suat Ahmet Avşar">
+  <meta name="google-site-verification" content="BU6A9xAjFXxFVvP6Y2XfIoH2MbkbrTBzM3yaEOtEoOI">
+  <meta name="theme-color" content="#DCC196">
+  <!-- Sekme ve ana ekran ikonları -->
+  <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <!-- Bağlantı paylaşılınca çıkan önizleme (WhatsApp, LinkedIn, X, Discord…).
+       Çoğu platform göreli yolu okumaz, bu yüzden tam adres yazılır. Alan adı değişirse:
+       canonical, og:image, og:url, twitter:image, kişi bilgisindeki url/image, robots.txt ve sitemap.xml -->
+  <link rel="canonical" href="https://suatahmetportfolyo.netlify.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="Suat Ahmet Avşar — Portfolyo">
+  <meta property="og:title" content="Suat Ahmet Avşar — Web Geliştirici">
+  <meta property="og:description" content="Markalar ve şirketler için fikirleri sade, hızlı ve kullanışlı web deneyimlerine dönüştürüyorum.">
+  <meta property="og:image" content="https://suatahmetportfolyo.netlify.app/media/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SA logosu ve portfolyo yazısı; altında Suat Ahmet Avşar, Web Geliştirici">
+  <meta property="og:url" content="https://suatahmetportfolyo.netlify.app/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Suat Ahmet Avşar — Web Geliştirici">
+  <meta name="twitter:description" content="Markalar ve şirketler için fikirleri sade, hızlı ve kullanışlı web deneyimlerine dönüştürüyorum.">
+  <meta name="twitter:image" content="https://suatahmetportfolyo.netlify.app/media/og-image.jpg">
+  <!-- Arama motorları için kişi bilgisi -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Suat Ahmet Avşar",
+      "jobTitle": "Web Geliştirici",
+      "url": "https://suatahmetportfolyo.netlify.app/",
+      "image": "https://suatahmetportfolyo.netlify.app/media/og-image.jpg",
+      "sameAs": [
+        "https://github.com/suatahmet07",
+        "https://www.linkedin.com/in/suat-ahmet-av%C5%9Far-77b844431/",
+        "https://bionluk.com/suatahmetavsar"
+      ],
+      "email": "mailto:suatahmetavsarofficial@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "İstanbul", "addressCountry": "TR" }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Poppins:wght@500;600;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <!-- JS varsa yükleme ekranı gösterilir (script.js kaldırır); JS yoksa site doğrudan görünür.
+       Aynı oturumda ikinci açılışta (sekme kapanana kadar) yükleme ekranı atlanır -->
+  <script>
+    (function () {
+      var seen = false;
+      try { seen = sessionStorage.getItem('sa-loader-seen') === '1'; } catch (e) {}
+      if (!seen) document.documentElement.classList.add('is-loading');
+      // Zayıf cihaz: az çekirdek ya da az bellek. 3D sahneler ve arka plan daha düşük çözünürlükte çizilir
+      // (light.js, laptop3d.js, book3d.js, showcase.js bu bayrağa bakar)
+      var n = navigator;
+      // Adrese ?low eklenirse güçlü bilgisayarda da zayıf cihaz ayarları denenebilir
+      window.LOW_END = (n.hardwareConcurrency || 8) <= 4 || (n.deviceMemory || 8) <= 4 || /[?&]low\b/.test(location.search);
+    })();
+  </script>
+  <!-- JS kapalıysa: kaydırma animasyonlu boş sahneler gizlenir, düz içerik görünür -->
+  <noscript>
+    <style>
+      .laptop-scene, .book-sticky, .contact-scene, .screen-title, .loader { display: none !important; }
+      .book-scene { height: auto; padding: 64px 6vw; }
+      .contact-end .footer { position: relative !important; margin-top: 0 !important; pointer-events: auto !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      #hakkimda-baslik { position: static; width: auto; height: auto; clip-path: none; }
+    </style>
+  </noscript>
+</head>
+<body>
+  <!-- Yükleme ekranı: 3D model, yazı tipleri ve sayfa hazır olunca kaybolur -->
+  <!-- Soluk SA logosu dalgalanan siyah sıvıyla dolar; dolunca "portfolyo" yazısı logonun arkasından
+       yana kayarak çıkar ve site açılır (script.js) -->
+  <div class="loader" id="loader" role="status">
+    <div class="loader-logo" aria-hidden="true">
+      <svg class="loader-mark" viewBox="30 54 148 94" width="148" height="94">
+        <!-- Logo şekilleri (icons/logo.svg ile aynı; S'nin şerit kırpması önceden hesaplanmış düz çokgenler).
+             Sıvı maske yerine geometrik kırpmayla sınırlanır: maske görüntü gibi işlendiği için
+             şeklin kenara değdiği yerlerde ince çizgi sızdırıyordu -->
+        <defs>
+          <clipPath id="ld-clip">
+            <polygon points="74,54.947 31,77.579 31,86.421 74,109.053 74,100.029 40.4,82.3 74,64.534" />
+            <polygon points="31,91.902 74,114.541 74,122.865 31,145.536 31,136.018 64.2,118.5 31,100.998" />
+            <polygon points="114.4,55 126.4,55 89.6,147.5 76.6,147.5" />
+            <polygon points="129.6,55 140.6,55 177.4,147.5 166.4,147.5" />
+          </clipPath>
+        </defs>
+        <!-- Boş hâli: logonun soluk gölgesi -->
+        <g fill="#000" opacity="0.2">
+          <polygon points="74,54.947 31,77.579 31,86.421 74,109.053 74,100.029 40.4,82.3 74,64.534" />
+          <polygon points="31,91.902 74,114.541 74,122.865 31,145.536 31,136.018 64.2,118.5 31,100.998" />
+          <polygon points="114.4,55 126.4,55 89.6,147.5 76.6,147.5" />
+          <polygon points="129.6,55 140.6,55 177.4,147.5 166.4,147.5" />
+        </g>
+        <!-- Sıvı: iki dalga katmanı, seviyesi yükleme ilerledikçe yükselir -->
+        <g clip-path="url(#ld-clip)">
+          <g class="ld-level" id="ldLevel" transform="translate(0 154)">
+            <path class="ld-wave ld-wave-back" d="M-118 0 Q-99.5 -6 -81 0 T-44 0 T-7 0 T30 0 T67 0 T104 0 T141 0 T178 0 V120 H-118 Z" />
+            <path class="ld-wave ld-wave-front" d="M-118 0 Q-99.5 5 -81 0 T-44 0 T-7 0 T30 0 T67 0 T104 0 T141 0 T178 0 V120 H-118 Z" />
+          </g>
+        </g>
+      </svg>
+      <span class="loader-word"><span>portfolyo</span></span>
+    </div>
+    <span class="sr-only">Yükleniyor</span>
+  </div>
+  <!-- Telefon yataydayken site yerine bu uyarı görünür (style.css .rotate-lock) -->
+  <div class="rotate-lock" role="status">
+    <svg viewBox="0 0 24 24" width="44" height="44" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2" /><path d="M11 18.5h2" /></svg>
+    <p>Siteyi görmek için telefonunu dikey tut.</p>
+  </div>
+  <a href="#main" class="skip-link">İçeriğe geç</a>
+
+  <!-- Hareketli ışık arka planı -->
+  <canvas id="light" class="light" aria-hidden="true"></canvas>
+
+  <header class="nav" id="nav">
+    <a href="#giris" class="logo" aria-label="Portfolyo — başa dön">
+      <img class="logo-mark" src="icons/logo.svg" alt="" width="148" height="94">
+      <span class="logo-text" aria-hidden="true">portfolyo</span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Ana menü">
+      <a href="#projeler">Projeler</a>
+      <a href="#hakkimda">Hakkımda</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Giriş: tam ekran karşılama. Duman ekranı sardıktan sonra yazılar belirir -->
+    <section class="intro" id="giris" aria-label="Karşılama">
+      <h1 class="intro-text" id="introText">
+        <span class="intro-line">Merhaba,</span>
+        <span class="intro-line">portföyüme hoş geldin.</span>
+        <span class="intro-line">Ben <span class="intro-name">Suat Ahmet.</span></span>
+      </h1>
+      <a href="#sahne-basla" class="scroll-hint intro-hint">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg>
+        Aşağı kaydır
+      </a>
+    </section>
+
+    <!-- Ekran açılınca içinde beliren, sonra ekrana sabitlenen başlık (laptop3d.js yönetir) -->
+    <div class="screen-title" id="screenTitle" aria-hidden="true">PROJELERİM</div>
+
+    <!-- Dönen bilgisayar: kaydırdıkça döner, sonra ekranına yaklaşılıp siteye girilir -->
+    <section class="laptop-scene" id="sahne" aria-label="Dönen dizüstü bilgisayar">
+      <span class="scene-anchor" id="sahne-basla" aria-hidden="true"></span>
+      <div class="laptop-sticky">
+        <!-- Bilgisayar dönerken yanlarından geçen dev harfler (laptop3d.js yerleştirir ve kaydırır) -->
+        <div class="side-words" id="sideWords" aria-hidden="true">
+          <div class="side-word" data-side="left">FULL</div>
+          <div class="side-word" data-side="right">STACK</div>
+          <div class="side-word" data-side="left">WEB</div>
+          <div class="side-word" data-side="right">DEVELOPER</div>
+        </div>
+        <canvas class="laptop-canvas" id="laptopCanvas" role="img" aria-label="Bir dizüstü bilgisayar dönüyor, ardından ekranına yaklaşılıyor"></canvas>
+      </div>
+    </section>
+
+    <!-- Projeler -->
+    <section class="section" id="projeler" aria-labelledby="projeler-baslik">
+      <div class="section-head reveal">
+        <span class="section-num">01</span>
+        <h2 id="projeler-baslik">Seçili <em>projeler</em></h2>
+      </div>
+      <div class="showcase" id="projectList">
+        <noscript>
+          <p style="padding: 24px 6vw"><a href="https://suatahmetportfolyoold.netlify.app/"><strong>Eski Portfolyo Sitem</strong></a> — HTML, CSS ve JavaScript ile sıfırdan yaptığım ilk portfolyo sitem.</p>
+        </noscript>
+      </div>
+    </section>
+
+    <!-- Hakkımda kitabı: önce dev "HAKKIMDA" yazısı geçer, sonra kitap dönerek gelip açılır (book3d.js) -->
+    <section class="book-scene" id="kitap" aria-labelledby="hakkimda-baslik">
+      <!-- Menüdeki "Hakkımda" buraya iner: kitabın açılıp sabitlendiği kaydırma noktası -->
+      <span class="book-anchor" id="hakkimda" aria-hidden="true"></span>
+      <h2 id="hakkimda-baslik" class="sr-only">Hakkımda</h2>
+      <noscript>
+        <p>İstanbul'da yaşayan bir web geliştiriciyim. Atatürk Üniversitesi Bilgisayar Programcılığı önlisans programında okuyorum ve MEB onaylı Yazılım ve Veri Tabanı Uzmanlığı sertifikam var.</p>
+      </noscript>
+      <div class="book-sticky">
+        <div class="book-title" id="bookTitle" aria-hidden="true">HAKKIMDA</div>
+        <canvas class="book-canvas" id="bookCanvas" tabindex="0" role="img"
+          aria-label="Açılmış bir kitap. Sayfaları sürükleyerek ya da sol ve sağ ok tuşlarıyla çevirebilirsiniz."></canvas>
+        <p class="book-hint" id="bookHint" aria-hidden="true"></p>
+      </div>
+      <!-- Kitaptaki bilgilerin ekran okuyucular için metin hâli -->
+      <ol class="sr-only" id="bookText"></ol>
+    </section>
+
+  </main>
+
+  <!-- Kitap yukarı çıkınca dev "İLETİŞİM" yazısı X ekseninde dönerek belirir, kısa durur ve dönerek
+       kaybolur. Kaydırmaya devam edince iletişim bilgilerinin harfleri sırayla dönerek girer; footer
+       kaymaz, ekranda sabit durur (contact-title.js) -->
+  <div class="contact-end" id="iletisimAlan">
+    <section class="contact-scene" id="iletisimSahne" aria-hidden="true">
+      <div class="contact-sticky">
+        <div class="contact-title" id="contactTitle">İLETİŞİM</div>
+      </div>
+    </section>
+
+  <!-- İletişim: sayfanın en altı -->
+  <footer class="footer" id="footer" aria-label="İletişim">
+    <!-- E-posta ve bağlantılar JS'siz de çalışsın diye HTML'de yazılı; JS varsa data.js'teki hâli yerine geçer -->
+    <a href="mailto:suatahmetavsarofficial@gmail.com" class="footer-mail" id="emailBtn" data-bind="email">suatahmetavsarofficial@gmail.com</a>
+    <ul class="socials" id="socials">
+      <li><a href="https://github.com/suatahmet07">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/suat-ahmet-av%C5%9Far-77b844431/">LinkedIn</a></li>
+      <li><a href="https://bionluk.com/suatahmetavsar">Bionluk</a></li>
+    </ul>
+    <nav class="footer-nav" aria-label="Hızlı ulaşım">
+      <a href="#projeler">Projeler</a>
+      <a href="#hakkimda">Hakkımda</a>
+    </nav>
+    <p class="footer-copy">© <span id="year"></span> <span data-bind="name"></span></p>
+    <p class="credits">
+      3D model: <a href="https://sketchfab.com/3d-models/modern-slim-laptop-fbf172f8b14241feab581dcb1fbcd475" target="_blank" rel="noopener">“Modern Slim Laptop”</a>,
+      <a href="https://sketchfab.com/Mraz3D" target="_blank" rel="noopener">Blaž Mraz</a> —
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.
+      Animasyon için ekran malzemesi uyarlanmıştır.
+    </p>
+    <!-- Sağ alt köşe: navbar'daki logonun aynısı, sitenin başına döner -->
+    <a href="#giris" class="logo footer-logo" aria-label="Portfolyo — başa dön">
+      <img class="logo-mark" src="icons/logo.svg" alt="" width="148" height="94">
+      <span class="logo-text" aria-hidden="true">portfolyo</span>
+    </a>
+  </footer>
+    <!-- Menüdeki "İletişim" buraya iner: sayfanın sonu, bilgilerin göründüğü nokta -->
+    <span class="contact-anchor" id="iletisim" aria-hidden="true"></span>
+  </div>
+
+  <!-- Kaydırınca sağ altta beliren "başa dön" oku (script.js) -->
+  <a href="#giris" class="to-top" id="toTop" aria-label="Sayfanın başına dön">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
+  </a>
+
+  <script src="light.js"></script>
+  <script src="data.js"></script>
+  <script src="render.js"></script>
+  <script src="script.js"></script>
+  <script src="showcase.js"></script>
+  <script src="contact-title.js"></script>
+  <script src="touch-scroll.js"></script>
+  <!-- Three.js (3D bilgisayar sahnesi) — sabit sürüm, CDN'den -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+      }
+    }
+  </script>
+  <!-- onerror: Three.js CDN'den gelmezse düz görünüme geçilir (script.js fail3D) -->
+  <script type="module" src="laptop3d.js" onerror="window.fail3D('laptop3d yüklenemedi')"></script>
+  <script type="module" src="book3d.js" onerror="window.fail3D('book3d yüklenemedi')"></script>
+  <!-- Ziyaretçi sayacı (GoatCounter): çerez kullanmaz -->
+  <script data-goatcounter="https://suatahmetportfolyonew.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

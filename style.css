@@ -1,0 +1,1205 @@
+/* ============ Renkler ve ölçüler ============ */
+:root {
+  --sand: #DCC196;         /* ana zemin */
+  --sand-light: #E8D0A8;   /* ışık tonu */
+  --ink: #201810;          /* ana yazı — zeminde 10.1:1 */
+  --ink-soft: #4A3524;     /* ikincil yazı — zeminde 6.6:1 */
+  --cream: #F5EBDC;        /* koyu buton üstü yazı */
+  --white: #FBF6EE;        /* sadece dev dekoratif yazı */
+
+  --card: rgba(232, 208, 168, 0.55);
+  --card-border: rgba(160, 120, 72, 0.28);
+  --line: rgba(160, 120, 72, 0.45);
+  --radius: 18px;
+  --radius-sm: 10px;
+
+  --font-body: 'Outfit', system-ui, sans-serif;
+  --font-display: 'Outfit', system-ui, sans-serif; /* başlıklar: aynı aile, ince ağırlık */
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-12: 96px;
+
+  --shadow-1: 0 1px 0 rgba(255, 250, 240, 0.5) inset, 0 12px 40px rgba(90, 64, 34, 0.1);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur: 280ms;
+  --dur-slow: 700ms;
+
+  --z-bg: -1;
+  --z-nav: 20;
+  --z-skip: 100;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--sand);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+img { display: block; max-width: 100%; height: auto; }
+
+svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Vurgu: kalın ve beyaz — giriş ekranındaki "Suat Ahmet" ile aynı dil */
+em {
+  font-style: normal;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection { background: var(--ink); color: var(--cream); }
+
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: -60px;
+  z-index: var(--z-skip);
+  padding: 10px 18px;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--radius-sm);
+  transition: top var(--dur-fast);
+}
+.skip-link:focus { top: var(--space-2); }
+
+/* ============ Başa dön oku ============ */
+.to-top {
+  position: fixed;
+  right: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  z-index: var(--z-nav);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--cream);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out), visibility 0s linear var(--dur);
+}
+.to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+.to-top:focus-visible { border-radius: 50%; }
+body.pd-lock .to-top, html.is-loading .to-top { opacity: 0; visibility: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .to-top { transition: none; }
+}
+
+/* ============ Telefon yatayken uyarı ============ */
+/* Web sayfası ekran yönünü kilitleyemez; yatay telefonda site yerine bu uyarı görünür */
+.rotate-lock { display: none; }
+@media (orientation: landscape) and (pointer: coarse) and (max-height: 500px) {
+  body { overflow: hidden; }
+  .rotate-lock {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: var(--sand);
+    color: var(--ink);
+    text-align: center;
+  }
+}
+
+/* ============ 3D çalışmazsa düz görünüm (script.js fail3D) ============ */
+html.no-3d .laptop-scene,
+html.no-3d .book-sticky { display: none; }
+html.no-3d .screen-title { visibility: hidden !important; }
+html.no-3d .book-scene { height: auto; max-width: 860px; margin: 0 auto; padding: var(--space-12) 6vw; }
+html.no-3d .book-anchor { top: 0; }
+html.no-3d #hakkimda-baslik,
+html.no-3d #bookText { position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal; }
+html.no-3d #hakkimda-baslik { margin-bottom: var(--space-4); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; }
+html.no-3d #bookText { display: grid; gap: var(--space-4); }
+html.no-3d #bookText h3 { font-size: 1.3rem; font-weight: 600; }
+html.no-3d #bookText ul { margin-top: var(--space-1); }
+
+/* ============ Işık arka planı ============ */
+.light {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-bg);
+  display: block;
+}
+
+/* ============ Navigasyon ============ */
+/* Çubuk görünmez ve sayfayla birlikte kayar: arka plan yok, yukarıya yapışmaz */
+.nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 6vw;
+}
+
+/* Logo: siyah SA işareti (icons/logo.svg) + yanında beyaz "portfolyo" */
+.logo {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-mark { display: block; width: auto; height: 26px; }
+.logo-text {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+/* Menü tuşları üst ortada; yazı sayfadaki diğer siyah yazılarla aynı aile ve renk */
+.nav-links {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.nav-links a {
+  position: relative;
+  display: inline-flex;
+  padding: 10px 2px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+/* ===== Buton yazısı animasyonu (menü ve sitedeki tüm butonlar; script.js rollText kurar) =====
+   Harf harf yukarı kayma: her harfin altında kopyası bekler, soldan başlayarak sırayla yer değiştirir.
+   Yazının altındaki çizgi üstüne gelince soldan sağa açılır, menüde aktif bölümde açık kalır. */
+.roll { position: relative; display: inline-flex; }
+.roll::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 420ms var(--ease-out);
+  pointer-events: none;
+}
+.roll-host:hover .roll::after,
+.roll-host:focus-visible .roll::after,
+.nav-links a.active .roll::after,
+.nav-links a[aria-current="page"] .roll::after { transform: scaleX(1); }
+.roll-ch {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  /* Ğ, Ü gibi harflerin üst noktaları ve ş, y alt uzantıları kesilmesin */
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+.roll-ch > span {
+  position: relative;
+  display: inline-block;
+  transition: transform 460ms var(--ease-out);
+  transition-delay: calc(var(--i) * 28ms);
+}
+/* Kopya, pencerenin tamamen dışında beklesin diye aradaki boşluk (0.3em) pencere payından büyük */
+.roll-ch > span::after {
+  content: attr(data-c);
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.3em);
+}
+.roll-host:hover .roll-ch > span,
+.roll-host:focus-visible .roll-ch > span { transform: translateY(calc(-100% - 0.3em)); }
+
+/* ============ Yükleme ekranı ============ */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 28px;
+  /* Zemin yok: arkadaki sitenin hareketli ışık arka planı görünür, içerik yükleme bitene kadar gizli */
+  background: none;
+  transition: opacity 700ms var(--ease-out), visibility 0s linear 700ms;
+}
+.nav, main, .contact-end { transition: opacity 700ms var(--ease-out); }
+html.is-loading .nav,
+html.is-loading main,
+html.is-loading .contact-end { opacity: 0; }
+html:not(.is-loading) .loader:not(.leaving) { display: none; }
+.loader.leaving { opacity: 0; visibility: hidden; pointer-events: none; }
+/* Logo + yazı: menüdeki logoyla aynı oranlar (logo 26px'e yazı 1.3rem, ara 12px), büyütülmüş */
+/* Yazı yerleşime katılmaz (logonun sağına mutlak konumlu): logo ilk kareden tam ortada durur.
+   Yazı çıkarken logo, ikili ortada kalsın diye yazı genişliğinin yarısı kadar sola kayar.
+   Hepsi transform: her karede yerleşim yeniden hesaplanmaz, titreme olmaz */
+.loader-logo {
+  --h: clamp(56px, 8vw, 92px);
+  --ww: 0px;                              /* yazı genişliği (script.js yazı çıkmadan hemen önce ölçer) */
+  position: relative;
+  transition: transform 1000ms cubic-bezier(0.65, 0, 0.25, 1);
+}
+.loader.ld-show-word .loader-logo { transform: translateX(calc(var(--ww) / -2)); }
+/* overflow gizli: dalga katmanı logodan çok daha geniş/uzun; kenarı logonun dışında ince çizgi bırakmasın */
+.loader-mark { display: block; height: var(--h); width: auto; overflow: hidden; }
+/* Sitedeki genel svg kuralı (stroke) logo şekillerine ve dalgalara ince kenar çizgisi çizmesin */
+.loader-mark, .loader-mark * { stroke: none; }
+/* Dalgalar yatayda sonsuz akar: yol iki dalga boyu (148 birim) kayınca başa döner, dikiş görünmez */
+.ld-wave { fill: #000; animation: ld-wave 2.6s linear infinite; }
+/* İki dalga da tam siyah: yarı saydam katman küçük boyutta yüzeyde ince gri bir çizgi gibi görünüyordu.
+   Ters yönlerde akan iki opak dalganın birleşimi yüzeyin şeklini sürekli değiştirir */
+.ld-wave-back { animation-duration: 3.8s; animation-direction: reverse; }
+@keyframes ld-wave { from { transform: translateX(0); } to { transform: translateX(148px); } }
+/* "portfolyo": A'nın sağ bacağının ("\") dış kenarından çapraz çıkar.
+   Kutu logonun solundan başlar; görünür alanın sol kenarı o bacağın kenarıyla aynı eğik çizgidir
+   (logo.svg: (140.6,55) → (177.4,147.5), eğim 0.3978). Kutu logonun %20 üstünden %20 altına uzanır;
+   çizginin o noktalardaki yeri logonun solundan 1.0928h ve 1.6497h (h = logo yüksekliği).
+   Yazı bu çizginin solunda gizli başlar, sağa kayınca bacağın kenarından çapraz belirir */
+.loader-word {
+  position: absolute;
+  left: 0;
+  top: calc(var(--h) * -0.2);
+  height: calc(var(--h) * 1.4);
+  display: flex;
+  align-items: center;
+  clip-path: polygon(calc(var(--h) * 1.0928) 0, 100% 0, 100% 100%, calc(var(--h) * 1.6497) 100%);
+}
+.loader-word > span {
+  display: block;
+  width: max-content;
+  margin-left: calc(var(--h) * 148 / 94);   /* logonun genişliği: yazı yine logonun sağında durur */
+  padding: 0.12em 0.05em 0.18em calc(var(--h) * 0.46);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: calc(var(--h) * 0.8);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: #fff;
+  /* Başta tamamen eğik çizginin solunda (logonun arkasında) */
+  transform: translateX(calc(-100% - var(--h) * 0.5));
+  transition: transform 1100ms cubic-bezier(0.65, 0, 0.25, 1);
+}
+.loader.ld-show-word .loader-word > span { transform: none; }
+/* Yükleme bitene kadar giriş yazılarının animasyonu bekler (gecikme de işlemez) */
+html.is-loading .intro-line,
+html.is-loading .intro .intro-hint { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .ld-wave { animation: none; }
+  .loader, .loader-logo, .loader-word > span, .nav, main, .contact-end { transition: none; }
+}
+
+/* ============ Giriş (tam ekran karşılama) ============ */
+.intro {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 6vw 120px;
+  overflow: hidden;
+}
+
+.intro-text {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 7.2vw, 7.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  color: #000000;
+  text-align: center;
+  text-wrap: balance;
+}
+/* Her satır ayrı blok: sırayla belirebilsinler */
+.intro-line {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  /* Açılma maskesi satır kutusuyla sınırlı: ş, y, p, ğ gibi harflerin alt uzantıları ve
+     Ö/Ü noktaları kesilmesin diye kutu her yönde genişletilir, eksi margin düzeni korur */
+  padding: 0.14em 0.08em 0.24em;
+  margin-block: -0.14em -0.24em;
+}
+.intro-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+}
+
+/* Satırlar sırayla soldan sağa açılarak gelir */
+.intro-line {
+  opacity: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+          mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  -webkit-mask-size: 250% 100%;
+          mask-size: 250% 100%;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: 100% 0;
+          mask-position: 100% 0;
+  animation: intro-wipe 1.5s var(--ease-out) forwards;
+  animation-delay: calc(0.45s + var(--i, 0) * 0.28s);
+}
+.intro-line:nth-child(2) { --i: 1; }
+.intro-line:nth-child(3) { --i: 2; }
+@keyframes intro-wipe {
+  0%   { opacity: 0; transform: translateX(-48px); -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  15%  { opacity: 1; }
+  100% { opacity: 1; transform: none; -webkit-mask-position: 0 0; mask-position: 0 0; }
+}
+
+.intro .intro-hint {
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: fade-in 1s ease 2.6s forwards;
+}
+@keyframes fade-in { to { opacity: 1; } }
+
+/* ============ Dönen bilgisayar sahnesi ============ */
+/* Uzun bölüm: içindeki tuval ekrana yapışır, kaydırma ilerlemesi animasyonu sürer.
+   Sayfanın en üstünden başlar ve giriş yazısının üstüne biner (tuval saydam),
+   böylece yazı kaybolurken bilgisayar aynı anda ekrana gelebilir */
+.laptop-scene {
+  position: relative;
+  height: 625vh; /* 600vh animasyon + 25vh başlığın sabit durduğu kısım (laptop3d.js HOLD) */
+  margin-top: -100vh;
+  margin-top: -100svh;
+}
+.laptop-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  pointer-events: none; /* alttaki giriş bağlantısı tıklanabilir kalsın */
+}
+/* "Aşağı kaydır" bağlantısının hedefi: bilgisayarın ekrana gelip dönmeye başladığı yer */
+.scene-anchor {
+  position: absolute;
+  top: calc(118vh + 88px);
+  left: 0;
+  width: 1px;
+  height: 1px;
+}
+.laptop-canvas {
+  position: relative;
+  z-index: 1; /* yazılar bilgisayarın arkasında kalır (dar ekranda üst üste binerse) */
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Bilgisayarın yanlarından geçen dev harfler: her harf alt alta, harf genişliği
+   bilgisayarın kenarı ile sayfa kenarı arasını neredeyse doldurur (boyut JS'te) */
+.side-words {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.side-word {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Poppins', var(--font-display);
+  font-weight: 900;
+  line-height: 0.82;
+  color: #fff;
+  visibility: hidden; /* JS boyutlandırıp konumlandırana kadar */
+  will-change: transform;
+}
+.side-word[data-side="left"] { left: 0; }
+.side-word[data-side="right"] { right: 0; }
+.side-word span { display: block; }
+
+/* Ekran pencereye dönüşünce içinde beliren dev başlık. Sayfaya sabit; bilgisayarın tuvalinin
+   arkasında durur, böylece yalnızca saydam ekrandan görünür. Konum ve ölçek JS'te */
+.screen-title {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  font-family: 'Poppins', var(--font-display);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: #fff;
+  pointer-events: none;
+  visibility: hidden;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Başlığı sabit dev yazı üstlenir; bölüm başlığı yalnızca ekran okuyucular için kalır */
+  /* Sahne bittiğinde başlık ekranın ortasında, bölümün üstü ekranın altındadır: başlık kendi
+     başına tam bir ekran kaplar, kartlar ancak bilgisayar kaybolup başlık kaymaya başlayınca gelir */
+  #projeler { position: relative; padding-top: 0; padding-bottom: 0; } /* kartlar başlığın hemen ardından gelir */
+  #projeler .section-head {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+.scroll-hint {
+  position: absolute;
+  left: 6vw;
+  bottom: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+.scroll-hint svg { animation: nudge 2.4s ease-in-out infinite; }
+@keyframes nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ============ Bölümler ============ */
+.section {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: var(--space-12) 6vw;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+.section-num {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+.section-head h2 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+.section-head h2 em { letter-spacing: -0.035em; }
+.section-head::after {
+  content: '';
+  flex: 1;
+  max-width: 240px;
+  height: 1px;
+  align-self: center;
+  background: var(--line);
+}
+
+.meta {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.tags li {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: rgba(251, 246, 238, 0.55);
+  border: 1px solid var(--card-border);
+}
+
+/* ============ Projeler: etrafımızda dönen kartlar ============ */
+/* Bakış noktası dikey eksenli bir silindirin tam merkezinde; kartlar silindirin iç yüzeyinde
+   etrafımızda durur. Her kart ince dikey şeritlerden oluşur, böylece yüzeyde gerçekten kavislenir.
+   Kaydırdıkça silindir döner: kart sağdan dönerek ortaya gelir, sıradakinin ucu sağda görünür.
+   Ölçüler ve dönüş showcase.js'te. */
+.showcase { position: relative; }
+.cyl-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+}
+.cyl-view { position: absolute; inset: 0; perspective: var(--persp, 1200px); }
+.cyl {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.cyl-card { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
+/* Klavye için kartın gizli düğmesi: görünmez ama odaklanabilir (3D sahnede opacity bozuk çizilir).
+   Odak halkası şeritlerde gösterilir */
+.cyl-open {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: transparent;
+  pointer-events: none;
+}
+.cyl-open:focus-visible { outline: none; }
+.cyl-card:has(.cyl-open:focus-visible) .cyl-strip { box-shadow: inset 0 3px 0 var(--ink), inset 0 -3px 0 var(--ink); }
+.cyl-strip {
+  position: absolute;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.cyl-flat { display: none; width: 100%; height: auto; }
+
+/* ---- Kartın üzerine gelince: karartma + proje adı + "Siteye git" ---- */
+/* --hov şeritlerdeki karartmayı, başlığın ve butonun görünürlüğünü birlikte sürer.
+   (3D sahnede opacity bozuk çizildiği için renk saydamlığıyla çalışılır.) */
+@property --hov { syntax: '<number>'; inherits: true; initial-value: 0; }
+.cyl-card { --hov: 0; cursor: pointer; transition: --hov 380ms var(--ease-out); }
+/* Yalnızca klavye odağı (:focus-visible) katmanı açık tutar. :focus-within fareyle tıklanan
+   karta / "Siteye git"e kalan odağı da sayıyordu; imleç gidince katman açık kalıyordu. */
+.cyl-card:hover, .cyl-card:has(:focus-visible) { --hov: 1; }
+.cyl-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--card-w, 600px) * 0.7);
+  text-align: center;
+  font-family: 'Poppins', var(--font-body);
+  font-weight: 600;
+  font-size: clamp(1.5rem, calc(var(--card-w, 600px) * 0.062), 3.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: rgb(251 246 238 / var(--hov));
+  translate: 0 calc((1 - var(--hov)) * 14px);
+  pointer-events: none;
+  backface-visibility: hidden;
+  transform-origin: 0 0;   /* dönüş/ölçek kartın merkezine göre: aksi halde yazı kenara kayar */
+}
+.cyl-visit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 2px;
+  /* Arka plan yok: yazı doğrudan karartma katmanının üzerinde, beyaz */
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: rgb(255 255 255 / var(--hov));
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+.cyl-visit svg { stroke: currentColor; fill: none; stroke-width: 2; }
+.cyl-card:hover .cyl-visit, .cyl-card:focus-visible .cyl-visit, .cyl-card:has(:focus-visible) .cyl-visit { pointer-events: auto; }
+.cyl-visit:focus-visible { outline: 2px solid #fff; outline-offset: 2px; border-radius: 4px; }
+.cyl-visit[data-soon] { cursor: not-allowed; }
+/* Dokunmatik ekranda üzerine gelme yok: katman hafifçe hep görünür */
+@media (hover: none) {
+  .cyl-card { --hov: 0.75; }
+  .cyl-visit { pointer-events: auto; }
+}
+/* Dar ekranda kart küçük: başlık tek satıra sığsın ve "Siteye git" butonuyla çakışmasın */
+@media (max-width: 860px) {
+  .cyl-label {
+    width: calc(var(--card-w, 320px) * 0.86);
+    font-size: clamp(1rem, calc(var(--card-w, 320px) * 0.06), 1.8rem);
+  }
+  .cyl-visit { font-size: 0.8rem; padding: 4px 2px; }
+  .cyl-visit svg { width: 13px; height: 13px; }
+}
+
+/* Proje açılırken sayfadaki diğer kartlar kaybolur */
+.cyl-stage { transition: opacity 520ms var(--ease-out), transform 700ms var(--ease-out); }
+.cyl-stage.pd-away { opacity: 0; transform: scale(0.94); }
+
+/* ============ Proje bilgileri katmanı ============ */
+/* body'ye verilir: html'e verilirse body kaydırma kutusuna dönüşür ve yapışkan sahne kayar */
+body.pd-lock { overflow: hidden; }
+.pd { position: fixed; inset: 0; z-index: 40; --pd-top: clamp(92px, 13vh, 128px); }
+/* Zemin düz renge dönmez: sayfanın hareketli ışık arka planı görünmeye devam eder.
+   Yalnızca üst menü çekilir ki bilgilerin önüne geçmesin. */
+.pd-bg { display: none; }
+.nav { transition: opacity 400ms var(--ease-out); }
+body.pd-lock .nav { opacity: 0; pointer-events: none; }
+.pd.out { opacity: 0; transition: opacity 420ms var(--ease-out); }
+.pd-scroll {
+  position: absolute;
+  inset: 0;
+  /* Kaydırılamaz: her şey tek ekrana sığar; geçişte yana kayan görsel ekran kenarında kesilir */
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  padding: clamp(20px, 3vh, 32px) clamp(8px, 2vw, 32px);
+}
+/* Düzleşme anındaki kavisli kopya (sayfadaki kartın tam üstünde) */
+.pd-bend { position: fixed; pointer-events: none; z-index: 2; }
+.pd-axis { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.pd-strip {
+  position: absolute;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  transition: transform 520ms cubic-bezier(0.65, 0, 0.25, 1);
+}
+.pd-axis { transition: transform 520ms cubic-bezier(0.65, 0, 0.25, 1); }
+
+.pd-close {
+  position: fixed;
+  top: clamp(16px, 3vh, 28px);
+  left: clamp(16px, 4vw, 64px);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  /* Menüdeki linklerle aynı: zeminsiz yazı, harf harf kayma ve alttan açılan çizgi (.roll) */
+  min-height: 44px;
+  padding: 10px 2px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: 400 1.0625rem/1.2 var(--font-body);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out);
+}
+.pd-close svg { stroke: currentColor; fill: none; stroke-width: 2; }
+.pd-close:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+.pd.landed .pd-close { opacity: 1; }
+/* Sağ üstte proje numarası: geri butonuyla aynı hizada */
+.pd-count {
+  position: fixed;
+  top: clamp(16px, 3vh, 28px);
+  right: clamp(16px, 4vw, 64px);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  font: 400 1.0625rem/1.2 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  pointer-events: none;
+}
+.pd-count-sep { margin: 0 0.45em; color: var(--ink-soft); }
+
+/* Kart büyüyerek ekranın ortasına sabitlenir: üstünde ortada proje adı, altında yıl, rol ve "Siteye git".
+   Genişlik, başlık ve alt satıra yer kalacak şekilde ekran yüksekliğine göre de sınırlanır. */
+.pd-layout {
+  --pd-w: min(94vw, calc((100svh - 180px) * 2.089));
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 1.8vh, 18px);
+}
+.pd-head, .pd-slot, .pd-meta { width: var(--pd-w); }
+.pd-slot { position: relative; }
+/* Geçişte sıradaki görsel eskisinin tam üstünde başlar */
+.pd-slot-in { position: relative; }
+.pd-card.pd-card-in { position: absolute; top: 0; left: 0; }
+
+/* Projeler arası geçiş: alt köşelerde yalnızca ok */
+.pd-arrow {
+  position: fixed;
+  bottom: clamp(2px, 0.8vh, 8px);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out);
+}
+.pd-prev { left: clamp(2px, 1.2vw, 20px); }
+.pd-next { right: clamp(2px, 1.2vw, 20px); }
+.pd-arrow svg { stroke: currentColor; fill: none; stroke-width: 1.8; transition: transform var(--dur-fast) var(--ease-out); }
+.pd-prev:hover svg { transform: translateX(-5px); }
+.pd-next:hover svg { transform: translateX(5px); }
+.pd-arrow:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 50%; }
+.pd.landed .pd-arrow { opacity: 1; }
+.pd-card { position: relative; width: 100%; transform-origin: 0 0; perspective: 1100px; }
+.pd-breath img { width: 100%; height: auto; }
+
+/* Harf harf, kendi etrafında dönerek belirme */
+.pd-word { display: inline-block; white-space: nowrap; }
+.pd-ch { display: inline-block; opacity: 0; transform-origin: 50% 55%; }
+.pd.go .pd-ch {
+  animation: pd-spin 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--n) * var(--step, 20ms));
+}
+@keyframes pd-spin {
+  0% { opacity: 0; transform: rotateY(-360deg) scale(0.4); }
+  45% { opacity: 1; }
+  100% { opacity: 1; transform: rotateY(0) scale(1); }
+}
+/* Çıkış: aynı dönüşün tersi, harf harf ve daha hızlı */
+.pd.leave .pd-ch {
+  animation: pd-spin-out 520ms cubic-bezier(0.55, 0, 0.75, 0) both;
+  animation-delay: calc(var(--n) * var(--step-out, 12ms));
+}
+@keyframes pd-spin-out {
+  0% { opacity: 1; transform: rotateY(0) scale(1); }
+  55% { opacity: 1; }
+  100% { opacity: 0; transform: rotateY(360deg) scale(0.4); }
+}
+.pd-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.pd-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.6vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-align: center;
+}
+.pd-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 32px;
+}
+.pd-facts { display: flex; flex-wrap: wrap; gap: 10px 40px; }
+.pd-facts dt { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.pd-facts dd { margin-top: 2px; font-weight: 500; font-size: 1.05rem; }
+.pd-links { display: flex; flex-wrap: wrap; gap: 0 24px; }
+/* Menüdeki linklerle aynı: zeminsiz yazı, harf harf kayma ve alttan açılan çizgi (.roll) */
+.pd-visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 2px;
+  font: 400 1.0625rem/1.2 var(--font-body);
+  color: var(--ink);
+}
+.pd-visit svg { stroke: currentColor; fill: none; stroke-width: 2; opacity: 0; transition: opacity 400ms var(--ease-out); }
+.pd.go .pd-visit svg { opacity: 1; transition-delay: calc(var(--n) * var(--step, 20ms) + 300ms); }
+.pd.leave .pd-visit svg { opacity: 0; transition-delay: 0ms; }
+.pd-visit[data-soon] { cursor: not-allowed; }
+.pd-visit:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+
+@media (max-width: 860px) {
+  .pd-layout { --pd-w: min(96vw, calc((100svh - 180px) * 2.089)); }
+  .pd-scroll { padding-top: 84px; }
+}
+
+/* Hareket azaltma: dönüş yok, projeler alt alta düz görünür */
+@media (prefers-reduced-motion: reduce) {
+  .showcase { height: auto !important; }
+  .cyl-stage { position: static; height: auto; width: auto; margin-left: 0; overflow: visible; }
+  .cyl-view { position: static; perspective: none; }
+  .cyl { position: static; width: auto; height: auto; display: grid; gap: var(--space-4); transform: none !important; }
+  .cyl-card { position: static; transform: none !important; visibility: visible !important; }
+  .cyl-strip { display: none; }
+  .cyl-flat { display: block; }
+  .cyl-card:has(.cyl-open:focus-visible) { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .cyl-card { position: relative; }
+  .cyl-card::after { content: ''; position: absolute; inset: 0; background: rgb(14 11 8 / calc(var(--hov) * 0.58)); pointer-events: none; }
+  .cyl-label { left: 50%; top: 50%; z-index: 1; transform: translate(-50%, -50%); }
+  .cyl-visit { left: auto; top: auto; right: 14px; bottom: 14px; z-index: 1; }
+  .cyl-stage, .pd-close, .pd-visit svg, .pd-arrow, .pd-bg { transition: none; }
+  .pd.go .pd-ch { animation: none; opacity: 1; }
+  .pd-ch { opacity: 1; }
+  .pd.leave .pd-ch { animation: none; }
+  .pd-visit svg { opacity: 1; }
+}
+
+.contact-title {
+  margin: var(--space-1) 0 var(--space-2);
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.socials { margin-top: var(--space-4); display: flex; justify-content: center; gap: var(--space-1); flex-wrap: wrap; }
+/* Sosyal butonlar: üzerine gelince zemin marka rengine döner, yazı hafifçe sola kayar
+   ve logo sağdan kayarak gelir. Logolar beyaz şekil olarak maskeyle boyanır. */
+/* Üçü aynı boyda: sabit genişlik, ince hap biçimli zemin. Tıklama alanı 44px yüksekliğinde kalır,
+   görünen zemin ondan incedir (::before üstten ve alttan içeride) */
+.socials a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Dar ekranda üçü yan yana sığsın: footer'ın iç genişliği (88vw) eksi aralar, üçe bölünür */
+  width: min(148px, calc((88vw - 2 * var(--space-1)) / 3));
+  min-height: 44px;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  isolation: isolate;
+  transition: color 320ms var(--ease-out);
+}
+/* Marka rengi ayrı katmanda: gradyan (Bionluk) da yumuşakça belirsin.
+   Hap biçimi: üst ve alt kenar düz, yanlar yarım daire */
+.socials a.social::before {
+  content: '';
+  position: absolute;
+  inset: 5px 0;
+  border-radius: 999px;
+  z-index: -1;
+  background: var(--brand);
+  opacity: 0;
+  transition: opacity 320ms var(--ease-out);
+}
+.socials a.social:hover::before,
+.socials a.social:focus-visible::before { opacity: 1; }
+.social { --brand: var(--ink); }
+.social-github { --brand: #000000; }
+.social-linkedin { --brand: #0A66C2; }
+.social-bionluk { --brand: linear-gradient(135deg, #FB3F57, #E83361); }
+.social-label { position: relative; display: inline-block; transition: transform 380ms var(--ease-out); }
+/* Logo yazının hemen sağında (yazının içinde) durur. Üzerine gelince yazı, logo + boşluğun
+   yarısı kadar sola kayar: yazı ile logo birlikte butonun ortasına gelir */
+.social-icon {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  /* Boyu yazının büyük harf boyuna yakın; ortası butonun değil yazının görünen ortasına
+     (büyük harflerin ortası butonun ortasından ~2px yukarıda) hizalı */
+  width: 15px;
+  height: 15px;
+  margin-top: -9.5px;
+  background: #fff;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+  opacity: 0;
+  transform: translateX(12px);
+  transition: transform 380ms var(--ease-out), opacity 260ms var(--ease-out);
+}
+.social-github .social-icon { --icon: url("icons/github.svg"); }
+.social-linkedin .social-icon { --icon: url("icons/linkedin.png"); }
+.social-bionluk .social-icon { --icon: url("icons/bionluk.png"); }
+.socials a.social:hover,
+.socials a.social:focus-visible { color: #fff; }
+.social:hover .social-label,
+.social:focus-visible .social-label { transform: translateX(-11.5px); /* (15px logo + 8px boşluk) / 2 */ }
+.social:hover .social-icon,
+.social:focus-visible .social-icon { opacity: 1; transform: none; }
+.social:focus-visible { outline: none; }
+.social:focus-visible::before { box-shadow: 0 0 0 2px var(--cream, #fff), 0 0 0 4px var(--ink); }
+/* Harf harf kayma menüdeki gibi; alt çizgi yok, renkli zemin yeterli */
+.social .roll::after { display: none; }
+
+.footer {
+  text-align: center;
+  padding: var(--space-6) 6vw var(--space-8);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.footer-mail {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  /* Dar ekranda adres kenarlara dayanmasın: genişliğe göre küçülür */
+  font-size: clamp(1.05rem, 4.7vw, 2rem);
+  font-weight: 500;
+  color: var(--ink);
+  /* Alt çizgi arka plan olarak çizilir: harfler ayrı kutulara bölününce (contact-title.js)
+     text-decoration onlara uzanmaz */
+  padding-bottom: 5px;
+  background: linear-gradient(currentColor, currentColor) left bottom / 100% 1.5px no-repeat;
+}
+/* Ana sayfanın iletişim alanı tam ekran; ekranın ortasında durur */
+.contact-end .footer {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.footer { position: relative; }
+/* Sağ alt köşedeki logo: başa dönüş bağlantısı (navbar'daki .logo ile aynı görünüm) */
+.footer-logo {
+  position: absolute;
+  right: 6vw;
+  bottom: var(--space-3);
+  transition: opacity var(--dur-fast);
+}
+.footer-logo:hover { opacity: 0.75; }
+.footer-logo:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 4px; }
+/* Dar ekranda atıf satırıyla çakışmasın: köşe yerine en altta, ortada */
+@media (max-width: 640px) {
+  .footer-logo { position: static; margin-top: var(--space-4); align-self: center; }
+}
+.footer .socials { margin-top: var(--space-2); }
+/* Hızlı ulaşım: menüdeki bağlantıların footer'daki kopyası */
+.footer-nav { margin-top: var(--space-2); display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-1); }
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 1rem;
+  color: var(--ink);
+}
+/* Üzerine gelince menüdeki gibi harf harf kayar ve altı çizilir (.roll, script.js) */
+.footer-copy { margin-top: var(--space-4); }
+/* Lisans gereği 3D model atfı */
+.credits { margin-top: var(--space-1); font-size: 0.8rem; }
+.credits a { background: linear-gradient(currentColor, currentColor) left 100% / 100% 1px no-repeat; }
+.credits a:hover { color: var(--ink); }
+
+/* ============ Kaydırınca belirme ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ============ Kariyer kitabı ============ */
+/* Bölüm boyu ve evreler book3d.js'te. Sahne ekrana yapışır: önce dev yazı soldan sağa ve yukarı
+   geçer, ardından kitap aşağıdan dönerek gelir, düzleşip açılır ve ekrana sabitlenir */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.book-scene { position: relative; height: 470vh; /* book3d.js: sahne s = 4.7'de çözülür */ }
+/* Menüdeki "Hakkımda" hedefi: kitabın açılıp sabitlendiği an (book3d.js OPEN bitişi, s ≈ 4.2).
+   html'deki scroll-padding-top (88px) kadar aşağıda durur ki tam o noktaya insin */
+.book-anchor { position: absolute; left: 0; top: calc(320vh + 88px); width: 1px; height: 1px; }
+.book-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+.book-title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Poppins', var(--font-display);
+  font-weight: 900;
+  font-size: clamp(5rem, 15vw, 15rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: #FFFFFF;
+  pointer-events: none;
+  visibility: hidden; /* JS konumlandırana kadar */
+  will-change: transform;
+}
+.book-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  touch-action: pan-y; /* dikey kaydırma sayfayı kaydırır, yatay sürükleme sayfa çevirir */
+  -webkit-tap-highlight-color: transparent;
+}
+.book-canvas:focus-visible { outline: none; }
+.book-canvas.is-grab { cursor: grab; }
+.book-canvas.is-grabbing { cursor: grabbing; }
+.book-hint {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(20px, 6vh, 56px);
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out);
+  pointer-events: none;
+}
+.book-hint.show { opacity: 1; }
+/* Telefonda ipucu kitabın hemen üstünde durur */
+@media (max-width: 640px) {
+  .book-hint { bottom: auto; top: calc(50% - 34vw - 2.6rem); }
+}
+
+/* ============ İletişim başlığı ============ */
+/* Kitap sahnesi çözülüp kitap ekrandan çıkınca bu bölümün üstü ekranın üstüne gelir. Oradan
+   itibaren yazı ekrana yapışır, kaydırdıkça X ekseninde dönerek belirir, kısa durur, aynı yönde
+   dönmeyi sürdürüp kendi içinde kaybolur (contact-title.js). Kaybolunca iletişim bilgileri gelir */
+.contact-scene { position: relative; height: 370vh; /* 100vh yapışık alan + 270vh dönüş · bekleme · dönüş · bilgiler */ }
+.contact-end { position: relative; }
+/* Menüdeki "İletişim" hedefi: alanın (ve sayfanın) sonu, bilgilerin göründüğü an */
+.contact-anchor { position: absolute; left: 0; bottom: 0; width: 1px; height: 1px; }
+/* İletişim bilgilerinin harfleri: kelimeler bölünmez, her harf kendi etrafında döner */
+.ct-word { display: inline-block; white-space: nowrap; }
+.ct-ch { display: inline-block; transform-origin: 50% 55%; }
+@media (prefers-reduced-motion: no-preference) {
+  /* Footer kaymaz: sahnenin son ekranına biner ve ekranın altına yapışık durur (sticky bottom).
+     Yazı kaybolduktan sonra harfler sırayla dönerek girer; yukarı kaydırınca solarak kaybolur */
+  .contact-end .footer {
+    position: sticky;
+    bottom: 0;
+    margin-top: -100vh;
+    pointer-events: none;
+    transition: opacity 450ms var(--ease-out); /* contact-title.js FADE_MS */
+  }
+  .contact-end .footer.show { pointer-events: auto; }
+  .contact-end .footer.hiding { opacity: 0; pointer-events: none; }
+  .footer.ct-ready .ct-ch { opacity: 0; }
+  .footer.show .ct-ch {
+    animation: pd-spin 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--n) * var(--step, 20ms));
+  }
+  /* Alt çizgiler harflerden sonra soldan sağa çizilir */
+  .footer.ct-ready .footer-mail, .footer.ct-ready .credits a { background-size: 0 1.5px; transition: background-size 700ms var(--ease-out); }
+  .footer.ct-ready .credits a { background-size: 0 1px; }
+  .footer.show .footer-mail { background-size: 100% 1.5px; transition-delay: 500ms; }
+  .footer.show .credits a { background-size: 100% 1px; transition-delay: 1200ms; }
+  /* Köşedeki logo işareti harf değil: "portfolyo" harfleri dönerken o da yumuşakça belirir */
+  .footer.ct-ready .footer-logo .logo-mark { opacity: 0; transition: opacity 600ms var(--ease-out); }
+  .footer.show .footer-logo .logo-mark { opacity: 1; transition-delay: 1100ms; }
+}
+.contact-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-title {
+  font-family: 'Poppins', var(--font-display);
+  font-weight: 900;
+  font-size: clamp(5rem, 16vw, 18rem); /* JS, PROJELERİM ile aynı boya ayarlar */
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: #FFFFFF;
+  pointer-events: none;
+  /* Solma yok: başta tam yatık (kenarı bize bakar, kalınlığı olmadığı için görünmez), dönerek çıkar.
+     Dönüş merkezi harflerin ortası; JS hesaplar */
+  transform: perspective(1400px) rotateX(90deg);
+  will-change: transform;
+}
+
+/* ============ Mobil ============ */
+@media (max-width: 768px) {
+  body { font-size: 1rem; }
+
+  /* Telefonda hamburger yok: küçük logo solda, üç bağlantı sağda aynı satırda */
+  .nav { padding: var(--space-1) 16px; }
+  .nav .logo { gap: 7px; }
+  .nav .logo-mark { height: 18px; }
+  .nav .logo-text { font-size: 0.95rem; }
+  .nav-links { position: static; transform: none; gap: 14px; }
+  .nav-links a { min-height: 44px; align-items: center; padding: 0 1px; font-size: 0.85rem; }
+
+  .section { padding: var(--space-8) 6vw; }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-hint svg { animation: none; }
+  .intro-line, .intro .intro-hint { opacity: 1; animation: none; }
+  .intro-line { -webkit-mask-image: none; mask-image: none; }
+  /* Hareket azaltma: sahne kaydırmaya bağlı değil, bilgisayar karşıdan sabit görünür */
+  .laptop-scene { height: auto; margin-top: 0; }
+  .laptop-sticky { position: relative; height: 80vh; }
+  .side-words, .screen-title { display: none; }
+  /* Kitap: kaydırma animasyonu yok, açık hâlde durur */
+  .book-scene { height: auto; }
+  .book-sticky { position: relative; }
+  .book-title { display: none; }
+  .book-canvas { opacity: 1; }
+  .contact-scene { display: none; }
+  .scene-anchor { top: 0; }
+  /* Harf kayması kapalı; alt çizgi anında belirir */
+  .roll-ch > span { transform: none !important; transition: none; }
+  .roll::after { transition: none; }
+  .social-label, .social-icon, .socials a.social::before { transition: none; }
+}

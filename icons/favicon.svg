@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="27 24 154 154" width="154" height="154">
+  <!-- Sekme ikonu: siyah SA logosu (icons/logo.svg ile aynı şekiller), kare alanın ortasında -->
+  <g fill="#000">
+    <polygon points="74,54.947 31,77.579 31,86.421 74,109.053 74,100.029 40.4,82.3 74,64.534" />
+    <polygon points="31,91.902 74,114.541 74,122.865 31,145.536 31,136.018 64.2,118.5 31,100.998" />
+    <polygon points="114.4,55 126.4,55 89.6,147.5 76.6,147.5" />
+    <polygon points="129.6,55 140.6,55 177.4,147.5 166.4,147.5" />
+  </g>
+</svg>

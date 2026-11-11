@@ -1,0 +1,20 @@
+# Bağımlılıklar
+node_modules/
+
+# Playwright çıktıları
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Yayın klasörü (npm run yayin ile üretilir)
+/yayin/
+
+# Editör / sistem dosyaları
+.vscode/
+.claude/
+.playwright-mcp/
+.DS_Store
+Thumbs.db
+desktop.ini
